@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang=en>
+   <head>
+      <script type="text/javascript" src="/js/sw-register.js"></script>
+      <title>BioTools App</title>
+      <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta http-equiv="Cache-Control" content="max-age=3600, must-revalidate" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no" />
+      <meta name="robots" content="NONE" />
+      <meta name="keywords" content="biology, биология, dna, rna, днк, рнк, молярная масса, химия, белки" />
+      <meta name="description" content="Набор утилит для помощи студентам с биологическими вычислениями." />
+      <meta name="author" content="limitedeternity" />
+      <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png" />
+      <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png" />
+      <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png" />
+      <link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png" />
+      <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png" />
+      <link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png" />
+      <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png" />
+      <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+      <link rel="manifest" href="/config/manifest.json" />
+      <meta name="msapplication-config" content="/config/browserconfig.xml" />
+      <meta name="msapplication-TileColor" content="#ec8d81" />
+      <meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png" />
+      <meta name="msapplication-starturl" content="https://biotools-webapp.herokuapp.com/webapp/" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="theme-color" content="#ec8d81" />
+      <link rel=stylesheet type="text/css" href="/css/main.css" />
+      <!--[if lte IE 9]>
+      <link rel=stylesheet type="text/css" href="/css/ie9.css" />
+      <![endif]-->
+      <!--[if lte IE 8]>
+      <link rel=stylesheet type="text/css" href="/css/ie8.css" />
+      <![endif]-->
+      <!--[if lte IE 8]><script type="text/javascript" src="/js/ie/production.ie.js"></script><![endif]-->
+   </head>
+   <body>
+      <div id=wrapper>
+         <header id=header class="alt style4">
+            <a href=/ class=logo><strong>BioTools</strong> <span>by limited.eternity</span></a>
+         </header>
+         <section id=banner class=style4>
+            <div class=inner>
+               <header class=major>
+                  <h1>BioTools App</h1>
+               </header>
+               <div class=content>
+                  <p><br>Welcome, we have arrived at our destination</br></p>
+               </div>
+            </div>
+         </section>
+         <div id=main>
+            <section id=one>
+               <div class=inner>
+                  <div style=text-align:center>
+                     <div style=width:100%;height:5px;clear:both></div>
+                     <form action=/webapp method=post id=input>
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <h4 style=text-align:left>Input:</h4>
+                        <input type=text name=seq_in value autocomplete=off />
+                        <div style=width:100%;height:35px;clear:both></div>
+                        <div id=output style=text-align:left;display:none>
+                           <h4>Output: </h4>
+                           <div id=data-output></div>
+                        </div>
+                        <div style=width:100%;height:35px;clear:both></div>
+                        <small>(<a href="/protein_reading" target=_blank>Remember how to read protein sequence?</a>)</small>
+                        <div style=width:100%;height:5px;clear:both></div>
+                        <small>(<a href="/example" target=_blank>What to write here?</a>)</small>
+                        <div style=width:100%;height:15px;clear:both></div>
+                        <select class=div-toggle data-target=.operations>
+                           <option class=color style=display:none value>Operations type</option>
+                           <option class=color value=1 data-show=.dna_menu>DNA</option>
+                           <option class=color value=2 data-show=.t-rna_menu>T-RNA</option>
+                           <option class=color value=3 data-show=.m-rna_menu>M-RNA</option>
+                           <option class=color value=4 data-show=.molar-mass_menu>Molar mass calculation</option>
+                           <option class=color value=5 data-show=.amount-calculation_menu>Amount calculation</option>
+                        </select>
+                        <div style=width:100%;height:25px;clear:both></div>
+                        <div class=operations style=text-align:left>
+                           <div class="dna_menu hide">
+                              <button type=button class=button onclick=DNA_Operation_button()>
+                              DNA Operations
+                              </button>
+                              <div id=dna_operations style=margin-left:15px;display:none>
+                                 <fieldset>
+                                    <div style=width:100%;height:15px;clear:both class="6u 12u$(small)"></div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=dna-to-protein name=action value="DNA to protein" />
+                                       <label for=dna-to-protein>DNA to protein</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=dna-to-messenger-rna name=action value="DNA to m-RNA" />
+                                       <label for=dna-to-messenger-rna>DNA to m-RNA</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=dna-to-transport-rna name=action value="DNA to t-RNA" />
+                                       <label for=dna-to-transport-rna>DNA to t-RNA</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=dna-complement name=action value="DNA complement" />
+                                       <label for=dna-complement>DNA complement</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=just-reverse_dna name=action value="Reverse sequence" />
+                                       <label for=just-reverse_dna>Reverse sequence</label>
+                                    </div>
+                                 </fieldset>
+                              </div>
+                           </div>
+                           <div style=width:100%;height:5px;clear:both></div>
+                           <div class="amount-calculation_menu hide">
+                              <button type=button class=button onclick=AC_Operation_button()>
+                              Amount calculation
+                              </button>
+                              <div id=amount-calculation_operations style=margin-left:15px;display:none>
+                                 <fieldset>
+                                    <div style=width:100%;height:15px;clear:both class="6u 12u$(small)"></div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=nucleotides_count_dna name=action value="DNA nucleotides count" />
+                                       <label for=nucleotides_count_dna>DNA nucleotides count</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=nucleotides_count_rna name=action value="RNA nucleotides count" />
+                                       <label for=nucleotides_count_rna>RNA nucleotides count</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=trinucleotides_count_dna name=action value="DNA trinucleotides count" />
+                                       <label for=trinucleotides_count_dna>DNA trinucleotides count</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=trinucleotides_count_rna name=action value="RNA trinucleotides count" />
+                                       <label for=trinucleotides_count_rna>RNA trinucleotides count</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=aminoacids_count_protein name=action value="Aminoacids count" />
+                                       <label for=aminoacids_count_protein>Aminoacids count</label>
+                                    </div>
+                                 </fieldset>
+                              </div>
+                           </div>
+                           <div style=width:100%;height:5px;clear:both></div>
+                           <div class="molar-mass_menu hide">
+                              <button type=button class=button onclick=MM_Operation_button()>
+                              Molar mass calculation
+                              </button>
+                              <div id=molar-mass_operations style=margin-left:15px;display:none>
+                                 <div style=width:100%;height:5px;clear:both class="6u 12u$(small)"></div>
+                                 <fieldset>
+                                    <div style=width:100%;height:15px;clear:both class="6u 12u$(small)"></div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=molar-mass-protein name=action value="Protein molar mass" />
+                                       <label for=molar-mass-protein>Protein molar mass</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=molar-mass-dna name=action value="DNA molar mass" />
+                                       <label for=molar-mass-dna>DNA molar mass</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=molar-mass-rna name=action value="RNA molar mass" />
+                                       <label for=molar-mass-rna>RNA molar mass</label>
+                                    </div>
+                                 </fieldset>
+                              </div>
+                           </div>
+                           <div style=width:100%;height:5px;clear:both></div>
+                           <div class="t-rna_menu hide">
+                              <button type=button class=button onclick=t_RNA_Operation_button()>
+                              T-RNA Operations
+                              </button>
+                              <div id=t-rna_operations style=margin-left:15px;display:none>
+                                 <div style=width:100%;height:5px;clear:both class="6u 12u$(small)"></div>
+                                 <fieldset>
+                                    <div style=width:100%;height:15px;clear:both class="6u 12u$(small)"></div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=transport-rna-to-messenger-rna name=action value="t-RNA to m-RNA" />
+                                       <label for=transport-rna-to-messenger-rna>t-RNA to m-RNA</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=transport-rna-to-protein name=action value="t-RNA to protein" />
+                                       <label for=transport-rna-to-protein>t-RNA to protein</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=transport-rna-to-dna name=action value="t-RNA to DNA" />
+                                       <label for=transport-rna-to-dna>t-RNA to DNA</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=just-reverse_t-rna name=action value="Reverse sequence" />
+                                       <label for=just-reverse_t-rna>Reverse sequence</label>
+                                    </div>
+                                 </fieldset>
+                              </div>
+                           </div>
+                           <div style=width:100%;height:5px;clear:both></div>
+                           <div class="m-rna_menu hide">
+                              <button type=button class=button onclick=m_RNA_Operation_button()>
+                              M-RNA Operations
+                              </button>
+                              <div id=m-rna_operations style=margin-left:15px;display:none>
+                                 <div style=width:100%;height:5px;clear:both class="6u 12u$(small)"></div>
+                                 <fieldset>
+                                    <div style=width:100%;height:15px;clear:both class="6u 12u$(small)"></div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=messenger-rna-to-transport-rna name=action value="m-RNA to t-RNA" />
+                                       <label for=messenger-rna-to-transport-rna>m-RNA to t-RNA</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=messenger-rna-to-protein name=action value="m-RNA to protein" />
+                                       <label for=messenger-rna-to-protein>m-RNA to protein</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=messenger-rna-to-dna name=action value="m-RNA to DNA" />
+                                       <label for=messenger-rna-to-dna>m-RNA to DNA</label>
+                                    </div>
+                                    <div class="6u 12u$(small)">
+                                       <input type=radio id=just-reverse_m-rna name=action value="Reverse sequence" />
+                                       <label for=just-reverse_m-rna>Reverse sequence</label>
+                                    </div>
+                                 </fieldset>
+                              </div>
+                           </div>
+                        </div>
+                        <div style=width:100%;height:15px;clear:both></div>
+                        <div style=text-align:left>
+                           <button type=submit class="button special">Make operation</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </section>
+         </div>
+      </div>
+      </div>
+      <script type="text/javascript" src="/js/production.js"></script>
+      <script type="text/javascript" src="/js/webapp.visual.js"></script>
+      <script type="text/javascript" src="/js/webapp.operator.js"></script>
+   </body>
+</html>
