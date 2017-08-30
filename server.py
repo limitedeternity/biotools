@@ -75,7 +75,7 @@ def webapp():
 		return response
 
 	elif request.method == 'POST':
-		string = request.form.get('seq_in', None).upper()
+		string = request.form.get('seq_in', None).strip().upper()
 		if string is not None and match(r"^[ATCGU]*$", string):
 			command = None
 
