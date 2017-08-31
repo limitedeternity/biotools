@@ -66,7 +66,7 @@ var returnFromCache = function(request){
 };
 
 self.addEventListener('activate', function(event) {
-  var cacheWhitelist = ['biotools-sw'];
+  var cacheWhitelist = [];
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
