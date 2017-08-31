@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 $(document).ready(function() {
     $("#input").on("submit", function(a) {
         if (navigator.onLine) {
@@ -25,9 +27,9 @@ $(document).ready(function() {
                 return obj;
             }, {});
 
-            if (data["seq_in"] != null && data["action"] != null) {
-                var sequence = data["seq_in"].trim().toUpperCase();
-                var action = data["action"];
+            if (data.seq_in != null && data.action != null) {
+                var sequence = data.seq_in.trim().toUpperCase();
+                var action = data.action;
 
                 var dna_protein_table = {
                     "ATA": "I",
@@ -202,7 +204,7 @@ $(document).ready(function() {
                     "T": "A",
                     "G": "C",
                     "C": "G",
-                }
+                };
 
                 var rna_complementation = {
                     "T": "A",
@@ -210,14 +212,14 @@ $(document).ready(function() {
                     "U": "A",
                     "G": "C",
                     "C": "G",
-                }
+                };
 
                 var reverse_rna_complementation = {
                     "U": "A",
                     "A": "T",
                     "G": "C",
                     "C": "G",
-                }
+                };
 
                 var water = 18.01;
 
@@ -225,104 +227,129 @@ $(document).ready(function() {
                     var result = sequence.replace(/[AGTC]{3}/g, m => dna_protein_table[m]);
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+
                 } else if (action == "DNA to m-RNA") {
                     var result = sequence.replaceAll("T", "U");
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+
                 } else if (action == "DNA to t-RNA" || action == "t-RNA to m-RNA" || action == "m-RNA to t-RNA") {
                     var arr = sequence.split('');
                     for (var i = 0; i < arr.length; i++) {
                         arr[i] = rna_complementation[arr[i]];
                     }
+
                     var result = arr.join('');
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+
                 } else if (action == "DNA complement") {
                     var arr = sequence.split('');
                     for (var i = 0; i < arr.length; i++) {
                         arr[i] = dna_complementation[arr[i]];
                     }
+
                     var result = arr.join('');
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+
                 } else if (action == "Reverse sequence") {
                     var result = sequence.split('').reverse().join('');
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+
                 } else if (action == "RNA nucleotides count" || action == "DNA nucleotides count") {
                     var count = sequence.match(/[AGTUC]{1}/g).reduce(function(memo, character) {
                         memo[character] = memo[character] + 1 || 1;
                         return memo;
                     }, {});
+
                     var result = JSON.stringify(count).replaceAll('{', '').replaceAll('}', '').replaceAll('"', '').replaceAll(':', ' - ').replaceAll(',', ', ');
                     $("#output").show();
                     $("#data-output").html("<ul><li>" + result + "</li></ul>");
+
                 } else if (action == "DNA trinucleotides count" || action == "RNA trinucleotides count") {
                     var count = sequence.match(/[AGTUC]{3}/g).reduce(function(memo, bundle) {
                         memo[bundle] = memo[bundle] + 1 || 1;
                         return memo;
                     }, {});
+
                     var result = JSON.stringify(count).replaceAll('{', '').replaceAll('}', '').replaceAll('"', '').replaceAll(':', ' - ').replaceAll(',', ', ');
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+
                 } else if (action == "Aminoacids count") {
                     var count = sequence.split('').reduce(function(memo, character) {
                         memo[character] = memo[character] + 1 || 1;
                         return memo;
                     }, {});
+
                     var result = JSON.stringify(count).replaceAll('{', '').replaceAll('}', '').replaceAll('"', '').replaceAll(':', ' - ').replaceAll(',', ', ');
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+
                 } else if (action == "Protein molar mass") {
                     var arr = sequence.split('');
                     for (var i = 0; i < arr.length; i++) {
                         arr[i] = protein_mass_table[arr[i]];
                     }
+
                     var result = arr.reduce(function(sum, value) {
                         return sum + value;
                     }, 0);
+
                     $("#output").show();
                     $("#data-output").html("<ul><li>" + (result - ((arr.length - 1) * water)).toFixed(4) + " g/mole." + "</li></ul>");
+
                 } else if (action == "DNA molar mass" || action == "RNA molar mass") {
                     var arr = sequence.split('');
                     for (var i = 0; i < arr.length; i++) {
                         arr[i] = nucleotide_mass_table[arr[i]];
                     }
+
                     var result = arr.reduce(function(sum, value) {
                         return sum + value;
                     }, 0);
+
                     $("#output").show();
                     $("#data-output").html("<ul><li>" + result.toFixed(4) + " g/mole." + "</li></ul>");
+
                 } else if (action == "t-RNA to protein") {
                     var arr = sequence.split('');
                     for (var i = 0; i < arr.length; i++) {
                         arr[i] = rna_complementation[arr[i]];
                     }
+
                     var m_rna = arr.join('');
                     var result = m_rna.replace(/[AGUC]{3}/g, m => rna_protein_table[m]);
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+
                 } else if (action == "t-RNA to DNA") {
                     var arr = sequence.split('');
                     for (var i = 0; i < arr.length; i++) {
                         arr[i] = reverse_rna_complementation[arr[i]];
                     }
-                    var result = arr.join('')
+
+                    var result = arr.join('');
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+
                 } else if (action == "m-RNA to DNA") {
                     var result = sequence.replaceAll("U", "T");
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+
                 } else if (action == "m-RNA to protein") {
                     var result = sequence.replace(/[AGUC]{3}/g, m => rna_protein_table[m]);
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+
                 }
             }
         }
 
-    })
+    });
 });
 
 String.prototype.replaceAll = function(search, replacement) {
