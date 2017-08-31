@@ -26,7 +26,7 @@ $(document).ready(function() {
             }, {});
 
             if (data["seq_in"] != null && data["action"] != null) {
-                var sequence = data["seq_in"].toUpperCase();
+                var sequence = data["seq_in"].trim().toUpperCase();
                 var action = data["action"];
 
                 var dna_protein_table = {
