@@ -133,7 +133,7 @@ def webapp():
 				return "<ul><li>Unable to identify command.</li></ul>"
 
 		else:
-			return "<ul><li>Input is empty.</li></ul>"
+			return "<ul><li>Invalid input.</li></ul>"
 
 
 @app.route("/example", methods=['GET'])
