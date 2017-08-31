@@ -345,7 +345,14 @@ $(document).ready(function() {
                     $("#output").show();
                     $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
 
+                } else {
+                    $("#output").show();
+                    $("#data-output").html("<ul><li>Unable to identify command.</li></ul>");
                 }
+
+            } else {
+                $("#output").show();
+                $("#data-output").html("<ul><li>Invalid input.</li></ul>");
             }
         }
 
