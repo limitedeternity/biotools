@@ -48,7 +48,7 @@ var checkResponse = function(request){
 var addToCache = function(request){
   return caches.open('biotools-sw').then(function(cache) {
     return fetch(request).then(function(response) {
-      return cache.put(request, response.clone());
+      return cache.put(request, response);
     });
   });
 };
