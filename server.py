@@ -1,6 +1,5 @@
 from flask import Flask, render_template, make_response, send_from_directory, request, jsonify
 from random import choice
-from re import match
 from os import chdir
 from os.path import dirname, abspath
 from subprocess import check_output
@@ -76,7 +75,8 @@ def webapp():
 
 	elif request.method == 'POST':
 		string = request.form.get('seq_in', None).strip().upper()
-		if string is not None and match(r"^[ATCGU]*$", string):
+
+		if string is not None:
 			command = None
 
 			# DNA
@@ -128,6 +128,12 @@ def webapp():
 			if command is not None:
 				output = check_output(['python', 'static/scripts/' + command, string]).strip().decode("utf-8")
 				return jsonify(str(output))
+
+			else:
+				return "<ul><li>Unable to identify command.</li></ul>"
+
+		else:
+			return "<ul><li>Input is empty.</li></ul>"
 
 
 @app.route("/example", methods=['GET'])
