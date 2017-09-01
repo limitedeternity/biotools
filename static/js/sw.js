@@ -1,7 +1,10 @@
 self.addEventListener('install', function(event) {
-  event.waitUntil(
-      caches.open('biotools-sw').then(function(cache) {
-          return cache.addAll([
+  event.waitUntil(preLoad());
+});
+
+var preLoad = function(){
+  return caches.open('biotools-sw').then(function(cache) {
+    return cache.addAll([
               '/protein_reading',
               '/example',
               '/offline',
@@ -21,12 +24,12 @@ self.addEventListener('install', function(event) {
               '/fonts/SemiBold-300.woff2',
               '/config/manifest.json',
               '/config/browserconfig.xml'
-          ]);
-      })
-  );
-});
+    ]);
+  });
+};
 
 self.addEventListener('fetch', function(event) {
+  console.log('The ServiceWorker is serving assets.');
   event.respondWith(checkResponse(event.request).catch(function() {
     return returnFromCache(event.request);}
   ));
@@ -46,16 +49,17 @@ var checkResponse = function(request){
 };
 
 var addToCache = function(request){
-  return caches.open('biotools-sw').then(function(cache) {
-    return fetch(request).then(function(response) {
+  return caches.open('biotools-sw').then(function (cache) {
+    return fetch(request).then(function (response) {
+      console.log('Cached page'+ response.url);
       return cache.put(request, response);
     });
   });
 };
 
 var returnFromCache = function(request){
-  return caches.open('biotools-sw').then(function(cache) {
-    return cache.match(request).then(function(matching) {
+  return caches.open('biotools-sw').then(function (cache) {
+    return cache.match(request).then(function (matching) {
      if(!matching || matching.status == 404) {
        return cache.match('/offline');
      } else {
@@ -64,18 +68,3 @@ var returnFromCache = function(request){
     });
   });
 };
-
-self.addEventListener('activate', function(event) {
-  var cacheWhitelist = [];
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-});
