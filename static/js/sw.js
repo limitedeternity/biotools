@@ -29,7 +29,6 @@ var preLoad = function(){
 };
 
 self.addEventListener('fetch', function(event) {
-  console.log('The ServiceWorker is serving assets.');
   event.respondWith(checkResponse(event.request).catch(function() {
     return returnFromCache(event.request);}
   ));
@@ -51,7 +50,6 @@ var checkResponse = function(request){
 var addToCache = function(request){
   return caches.open('biotools-sw').then(function (cache) {
     return fetch(request).then(function (response) {
-      console.log('Cached page'+ response.url);
       return cache.put(request, response);
     });
   });
