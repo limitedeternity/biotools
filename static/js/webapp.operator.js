@@ -10,16 +10,18 @@ $(document).ready(function() {
                 },
                 url: "/webapp",
                 type: "POST",
-                data: $("#input").serialize(),
                 dataType: "json",
-                success: function(b) {
-                    $("#output").show();
-                    $("#data-output").html(b);
-                },
-                error: function() {
-                    window.alert("Error occurred.");
-                }
+                data: $("#input").serialize(),
+            })
+            .done(function(data) {
+                $("#output").show();
+                $("#data-output").html(data);
+            })
+            .fail(function() {
+                $("#output").show();
+                $("#data-output").html("<ul><li>Error occured. Please reload page and try again.</li></ul>");
             });
+            
         } else {
             a.preventDefault();
             var data = $("#input").serializeArray().reduce(function(obj, item) {
