@@ -9,6 +9,9 @@
     },
     "PYTHONHASHSEED": {
       "required": true
+    },
+    "PYTHONIOENCODING": {
+      "required": true
     }
   },
   "formation": {
