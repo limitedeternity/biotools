@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, render_template, make_response, send_from_directory, request, jsonify
 from random import choice
 from os import chdir
