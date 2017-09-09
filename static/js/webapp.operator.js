@@ -6,7 +6,7 @@ $(document).ready(function() {
             a.preventDefault();
 
             $("#output").show();
-            $("#output").html('<div class="span"><div class="typing_loader"></div></div>');
+            $("#data-output").html('<div class="span"><div class="typing_loader"></div></div>');
 
             $.ajax({
                 headers: {
