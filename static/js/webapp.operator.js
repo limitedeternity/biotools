@@ -4,6 +4,10 @@ $(document).ready(function() {
     $("#input").on("submit", function(a) {
         if (navigator.onLine) {
             a.preventDefault();
+
+            $("#output").show();
+            $("#output").html('<div class="span"><div class="typing_loader"></div></div>');
+
             $.ajax({
                 headers: {
                     "X-CSRFToken": Cookies.get("csrftoken")
@@ -14,11 +18,9 @@ $(document).ready(function() {
                 data: $("#input").serialize(),
             })
             .done(function(data) {
-                $("#output").show();
                 $("#data-output").html(data);
             })
             .fail(function() {
-                $("#output").show();
                 $("#data-output").html("<ul><li>Error occured. Please reload page and try again.</li></ul>");
             });
             
