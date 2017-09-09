@@ -26,6 +26,7 @@ def index():
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
 	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Cache-Control'] = 'no-cache'
 	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
@@ -37,6 +38,7 @@ def it():
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
 	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Cache-Control'] = 'no-cache'
 	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
@@ -48,6 +50,7 @@ def biology():
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
 	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Cache-Control'] = 'no-cache'
 	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
@@ -59,6 +62,7 @@ def chemistry():
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
 	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Cache-Control'] = 'no-cache'
 	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
@@ -71,6 +75,7 @@ def webapp():
 		response.headers['X-Frame-Options'] = 'DENY'
 		response.headers['X-XSS-Protection'] = '1; mode=block'
 		response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+		response.headers['Cache-Control'] = 'no-cache'
 		response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 		return response
 
@@ -144,6 +149,7 @@ def example():
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
 	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Cache-Control'] = 'no-cache'
 	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
@@ -155,6 +161,7 @@ def protein_iupac():
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
 	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Cache-Control'] = 'no-cache'
 	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
@@ -166,6 +173,7 @@ def offline():
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
 	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Cache-Control'] = 'no-cache'
 	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
