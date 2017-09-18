@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, make_response, send_from_directory, request, jsonify
+from flask_sslify import SSLify
 from random import choice
 from os import chdir
 from os.path import dirname, abspath
@@ -12,6 +13,7 @@ from sys import argv
 app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = environ.get("SECRET_KEY", "".join(choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for _ in range(50)))
 csrf = CSRFProtect(app)
+sslify = SSLify(app)
 
 
 '''
@@ -25,9 +27,9 @@ def index():
 	response.headers['X-Content-Type-Options'] = 'nosniff'
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
-	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Strict-Transport-Security'] = 'max-age=31536000'
 	response.headers['Cache-Control'] = 'no-cache'
-	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'"
+	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'"
 	return response
 
 
@@ -37,9 +39,9 @@ def it():
 	response.headers['X-Content-Type-Options'] = 'nosniff'
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
-	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Strict-Transport-Security'] = 'max-age=31536000'
 	response.headers['Cache-Control'] = 'no-cache'
-	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
+	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
 
@@ -49,9 +51,9 @@ def biology():
 	response.headers['X-Content-Type-Options'] = 'nosniff'
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
-	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Strict-Transport-Security'] = 'max-age=31536000'
 	response.headers['Cache-Control'] = 'no-cache'
-	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
+	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
 
@@ -61,9 +63,9 @@ def chemistry():
 	response.headers['X-Content-Type-Options'] = 'nosniff'
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
-	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Strict-Transport-Security'] = 'max-age=31536000'
 	response.headers['Cache-Control'] = 'no-cache'
-	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
+	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
 
@@ -74,7 +76,7 @@ def webapp():
 		response.headers['X-Content-Type-Options'] = 'nosniff'
 		response.headers['X-Frame-Options'] = 'DENY'
 		response.headers['X-XSS-Protection'] = '1; mode=block'
-		response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+		response.headers['Strict-Transport-Security'] = 'max-age=31536000'
 		response.headers['Cache-Control'] = 'no-cache'
 		response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 		return response
@@ -148,9 +150,9 @@ def example():
 	response.headers['X-Content-Type-Options'] = 'nosniff'
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
-	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Strict-Transport-Security'] = 'max-age=31536000'
 	response.headers['Cache-Control'] = 'no-cache'
-	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
+	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
 
@@ -160,9 +162,9 @@ def protein_iupac():
 	response.headers['X-Content-Type-Options'] = 'nosniff'
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
-	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Strict-Transport-Security'] = 'max-age=31536000'
 	response.headers['Cache-Control'] = 'no-cache'
-	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
+	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
 
@@ -172,9 +174,9 @@ def offline():
 	response.headers['X-Content-Type-Options'] = 'nosniff'
 	response.headers['X-Frame-Options'] = 'DENY'
 	response.headers['X-XSS-Protection'] = '1; mode=block'
-	response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+	response.headers['Strict-Transport-Security'] = 'max-age=31536000'
 	response.headers['Cache-Control'] = 'no-cache'
-	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
+	response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'"
 	return response
 
 
