@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:$PORT --worker-class gevent server:app
+web: gunicorn -w 1 -b 0.0.0.0:$PORT -k eventlet server:app
