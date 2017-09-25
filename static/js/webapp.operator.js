@@ -7,11 +7,16 @@ $(document).ready(function() {
 
             $("#output").show();
             $("#data-output").html('<div class="span"><div class="typing_loader"></div></div>');
+            
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                    }
+                }
+            });
 
             $.ajax({
-                headers: {
-                    "X-CSRFToken": Cookies.get("csrftoken")
-                },
                 url: "/webapp",
                 type: "POST",
                 dataType: "json",
