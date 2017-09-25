@@ -8,6 +8,7 @@ $(document).ready(function() {
             $("#output").show();
             $("#data-output").html('<div class="span"><div class="typing_loader"></div></div>');
             
+            var csrf_token = "{{ csrf_token() }}";
             $.ajaxSetup({
                 beforeSend: function(xhr, settings) {
                     if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
