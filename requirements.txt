@@ -2,4 +2,5 @@ Flask
 Flask-WTF
 flask-sslify
 gunicorn
+gevent
 biopython
