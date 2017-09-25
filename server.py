@@ -7,9 +7,7 @@ from os import chdir
 from os.path import dirname, abspath
 from subprocess import check_output
 from flask_wtf.csrf import CSRFProtect
-from waitress import serve
 from os import environ
-from sys import argv
 
 app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = environ.get("SECRET_KEY", "".join(choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for _ in range(50)))
@@ -219,4 +217,4 @@ def serve_fonts(path):
 
 if __name__ == "__main__":
 	chdir(dirname(abspath(__file__)))
-	serve(app, host='0.0.0.0', port=argv[1])
+	app.run(debug=False, use_reloader=True)
