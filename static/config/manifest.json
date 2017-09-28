@@ -8,7 +8,7 @@
     "short_name": "BioTools",
     "theme_color": "transparent",
     "description": "Набор утилит для помощи студентам с биологическими вычислениями.",
-    "orientation": "portrait",
+    "orientation": "any",
     "background_color": "transparent",
     "related_applications": [],
     "prefer_related_applications": false,
