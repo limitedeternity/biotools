@@ -4,7 +4,6 @@ from flask import Flask, render_template, make_response, send_from_directory, re
 from flask_sslify import SSLify
 from random import choice
 from os import chdir
-from urllib.parse import urlparse, urlunparse
 from os.path import dirname, abspath
 from subprocess import check_output
 from flask_wtf.csrf import CSRFProtect
@@ -14,14 +13,6 @@ app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = environ.get("SECRET_KEY", "".join(choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for _ in range(50)))
 csrf = CSRFProtect(app)
 sslify = SSLify(app)
-
-
-@app.before_request
-def redirect_from_www():
-    urlparts = urlparse(request.url)
-    if urlparts.netloc.startswith('www.'):
-        url_update = '.'.join(urlparts.netloc.split('.')[1:])
-        return redirect(urlunparse(url_update), code=301)
 
 
 '''
