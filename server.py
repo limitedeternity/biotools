@@ -28,7 +28,6 @@ def index():
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000'
     response.headers['Cache-Control'] = 'no-cache'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'"
     return response
 
 
@@ -40,7 +39,6 @@ def it():
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000'
     response.headers['Cache-Control'] = 'no-cache'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'; object-src 'none'"
     return response
 
 
@@ -52,7 +50,6 @@ def biology():
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000'
     response.headers['Cache-Control'] = 'no-cache'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'; object-src 'none'"
     return response
 
 
@@ -64,7 +61,6 @@ def chemistry():
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000'
     response.headers['Cache-Control'] = 'no-cache'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self'; object-src 'none'"
     return response
 
 
@@ -77,7 +73,6 @@ def webapp():
         response.headers['X-XSS-Protection'] = '1; mode=block'
         response.headers['Strict-Transport-Security'] = 'max-age=31536000'
         response.headers['Cache-Control'] = 'no-cache'
-        response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; object-src 'none'; font-src 'self'"
         return response
 
     elif request.method == 'POST':
@@ -151,7 +146,6 @@ def example():
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000'
     response.headers['Cache-Control'] = 'no-cache'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self'; object-src 'none'"
     return response
 
 
@@ -163,7 +157,6 @@ def protein_iupac():
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000'
     response.headers['Cache-Control'] = 'no-cache'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self'; object-src 'none'"
     return response
 
 
@@ -175,7 +168,6 @@ def offline():
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000'
     response.headers['Cache-Control'] = 'no-cache'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self'; object-src 'none'"
     return response
 
 
