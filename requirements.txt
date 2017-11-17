@@ -1,6 +1,4 @@
 Flask
-Flask-WTF
 flask-sslify
 gunicorn
 eventlet
-biopython
