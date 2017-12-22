@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, make_response, send_from_directory, redirect
+from flask import Flask, render_template, make_response, send_from_directory, redirect, abort
 from flask_sslify import SSLify
 from random import choice
 from os import chdir, environ
@@ -75,6 +75,9 @@ def offline():
 def serve_sw(path):
     if path != 'sw.js':
         return send_from_directory('sw', path)
+    
+    else:
+        abort(404)
 
 @app.route('/sw.js', methods=['GET'])
 def serviceworker():
