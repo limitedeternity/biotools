@@ -8,12 +8,13 @@ from os.path import dirname, abspath
 from whitenoise import WhiteNoise
 
 
+debug = False
 app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = environ.get("SECRET_KEY", "".join(choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for _ in range(50)))
+app.wsgi_app = WhiteNoise(app.wsgi_app, root="static/")
 
-sslify = SSLify(app)
-
-app = WhiteNoise(app, root="static/")
+if not debug:
+    sslify = SSLify(app)
 
 
 '''
@@ -82,3 +83,4 @@ def serviceworker():
 
 if __name__ == "__main__":
     chdir(dirname(abspath(__file__)))
+    app.run(debug=debug, use_reloader=True)
