@@ -3,13 +3,13 @@
 from flask import Flask, render_template, make_response, send_from_directory, redirect
 from flask_sslify import SSLify
 from random import choice
-from os import chdir
+from os import chdir, environ
 from os.path import dirname, abspath
-from os import environ
+from whitenoise import WhiteNoise
 
 
 debug = False
-app = Flask(__name__, template_folder='templates')
+app = WhiteNoise(Flask(__name__, template_folder='templates'), root="static/")
 app.config['SECRET_KEY'] = environ.get("SECRET_KEY", "".join(choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for _ in range(50)))
 
 if not debug:
@@ -70,41 +70,14 @@ def offline():
     response.headers['Cache-Control'] = 'no-cache'
     return response
 
-
-'''
-Frontend handling
-'''
-
-
-@app.route('/config/<path:path>', methods=['GET'])
-def serve_config(path):
-    return send_from_directory('static/config', path)
-
+@app.route('/sw/<path:path>', methods=['GET'])
+def serve_sw(path):
+    if path != 'sw.js':
+        return send_from_directory('sw', path)
 
 @app.route('/sw.js', methods=['GET'])
 def serviceworker():
-    return send_from_directory('static/js', 'sw.js')
-
-
-@app.route('/js/<path:path>', methods=['GET'])
-def serve_js(path):
-    if path != 'sw.js':
-        return send_from_directory('static/js', path)
-
-
-@app.route('/css/<path:path>', methods=['GET'])
-def serve_css(path):
-    return send_from_directory('static/css', path)
-
-
-@app.route('/images/<path:path>', methods=['GET'])
-def serve_image(path):
-    return send_from_directory('static/images', path)
-
-
-@app.route('/fonts/<path:path>', methods=['GET'])
-def serve_fonts(path):
-    return send_from_directory('static/fonts', path)
+    return send_from_directory('sw', 'sw.js')
 
 
 if __name__ == "__main__":
