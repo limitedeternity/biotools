@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, make_response, send_from_directory, redirect, abort
-from flask_sslify import SSLify
 from random import choice
 from os import chdir, environ
 from os.path import dirname, abspath
+from flask import Flask, render_template, make_response, send_from_directory, redirect, abort
+from flask_sslify import SSLify
 from whitenoise import WhiteNoise
 
 
@@ -35,7 +35,6 @@ def webapp():
     response.headers['X-Frame-Options'] = 'DENY'
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000'
-    response.headers['Cache-Control'] = 'no-cache'
     return response
 
 
@@ -46,7 +45,6 @@ def example():
     response.headers['X-Frame-Options'] = 'DENY'
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000'
-    response.headers['Cache-Control'] = 'no-cache'
     return response
 
 
@@ -57,7 +55,6 @@ def protein_iupac():
     response.headers['X-Frame-Options'] = 'DENY'
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000'
-    response.headers['Cache-Control'] = 'no-cache'
     return response
 
 
@@ -68,14 +65,13 @@ def offline():
     response.headers['X-Frame-Options'] = 'DENY'
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000'
-    response.headers['Cache-Control'] = 'no-cache'
     return response
 
 @app.route('/sw/<path:path>', methods=['GET'])
 def serve_sw(path):
     if path != 'sw.js':
         return send_from_directory('sw', path)
-    
+
     else:
         abort(404)
 
