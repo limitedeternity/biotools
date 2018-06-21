@@ -4,7 +4,7 @@ self.addEventListener('install', function(event) {
   event.waitUntil(preLoad());
 });
 
-var preLoad = function(){
+var preLoad = function() {
   return caches.open('biotools-sw').then(function(cache) {
     return cache.addAll([
               '/protein_reading',
