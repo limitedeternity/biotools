@@ -1,6 +1,4 @@
 Flask
 flask-sslify
 gunicorn
-eventlet
-olefile
 whitenoise
