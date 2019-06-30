@@ -214,11 +214,11 @@ $(document).ready(function() {
             return dna_protein_table[m];
           });
 
-          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' readonly />");
         } else if (action == "DNA to m-RNA") {
           var result = sequence.replaceAll("T", "U");
 
-          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' readonly />");
         } else if (action == "DNA to t-RNA" || action == "t-RNA to m-RNA" || action == "m-RNA to t-RNA") {
           var arr = sequence.split('');
           for (var i = 0; i < arr.length; i++) {
@@ -227,7 +227,7 @@ $(document).ready(function() {
 
           var result = arr.join('');
 
-          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' readonly />");
         } else if (action == "DNA complement") {
           var arr = sequence.split('');
           for (var i = 0; i < arr.length; i++) {
@@ -236,11 +236,11 @@ $(document).ready(function() {
 
           var result = arr.join('');
 
-          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' readonly />");
         } else if (action == "Reverse sequence") {
           var result = sequence.split('').reverse().join('');
 
-          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' readonly />");
         } else if (action == "RNA nucleotides count" || action == "DNA nucleotides count") {
           var count = sequence.match(/[AGTUC]{1}/g).reduce(function(memo, character) {
             memo[character] = memo[character] + 1 || 1;
@@ -258,7 +258,7 @@ $(document).ready(function() {
 
           var result = JSON.stringify(count).replaceAll('{', '').replaceAll('}', '').replaceAll('"', '').replaceAll(':', ' - ').replaceAll(',', ', ');
 
-          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' readonly />");
         } else if (action == "Aminoacids count") {
           var count = sequence.split('').reduce(function(memo, character) {
             memo[character] = memo[character] + 1 || 1;
@@ -267,7 +267,7 @@ $(document).ready(function() {
 
           var result = JSON.stringify(count).replaceAll('{', '').replaceAll('}', '').replaceAll('"', '').replaceAll(':', ' - ').replaceAll(',', ', ');
 
-          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' readonly />");
         } else if (action == "Protein molar mass") {
           var arr = sequence.split('');
           for (var i = 0; i < arr.length; i++) {
@@ -303,7 +303,7 @@ $(document).ready(function() {
             return rna_protein_table[m];
           });
 
-          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' readonly />");
         } else if (action == "t-RNA to DNA") {
           var arr = sequence.split('');
           for (var i = 0; i < arr.length; i++) {
@@ -312,17 +312,17 @@ $(document).ready(function() {
 
           var result = arr.join('');
 
-          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' readonly />");
         } else if (action == "m-RNA to DNA") {
           var result = sequence.replaceAll("U", "T");
 
-          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' readonly />");
         } else if (action == "m-RNA to protein") {
           var result = sequence.replace(/[AGUC]{3}/g, function(m) {
             return rna_protein_table[m];
           });
 
-          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' />");
+          $("#data-output").html("<input type='text' value='" + result + "' name='seq_out' autocomplete='off' readonly />");
         } else {
 
           $("#data-output").html("<ul><li>Unable to identify command.</li></ul>");
